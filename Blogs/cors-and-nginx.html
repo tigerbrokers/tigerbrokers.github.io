@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>有关跨域 CORS 及 Nginx 配置 | TEFD</title>
+    <meta name="description" content="老虎前端团队">
+    <link rel="icon" href="/imgs/logo.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/imgs/logo.png">
+    
+    <link rel="preload" href="/assets/css/0.styles.e33fcdb0.css" as="style"><link rel="preload" href="/assets/js/app.5959fe07.js" as="script"><link rel="preload" href="/assets/js/5.2dd04340.js" as="script"><link rel="prefetch" href="/assets/js/4.d892ce39.js"><link rel="prefetch" href="/assets/js/1.f8d64ea8.js"><link rel="prefetch" href="/assets/js/2.72731567.js"><link rel="prefetch" href="/assets/js/3.75cd7776.js"><link rel="prefetch" href="/assets/js/6.95cbbf58.js"><link rel="prefetch" href="/assets/js/7.fc14adbd.js"><link rel="prefetch" href="/assets/js/8.dae4b004.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e33fcdb0.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/" class="home-link router-link-active"><!----><span class="site-name">
+      TEFD
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">文章</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/Blogs/data-visiualization.html" class="nav-link">有关数据可视化学习</a></li><li class="dropdown-item"><!----><a href="/Blogs/cors-and-nginx.html" class="nav-link router-link-exact-active router-link-active">有关跨域 CORS 及 Nginx 配置</a></li><li class="dropdown-item"><!----><a href="/Blogs/webpack.html" class="nav-link">webpack构建工具</a></li><li class="dropdown-item"><!----><a href="/Blogs/chart.html" class="nav-link">数据可视化</a></li><li class="dropdown-item"><!----><a href="/Blogs/vue-skeleton.html" class="nav-link">Vue骨架屏</a></li></ul></div></div><div class="nav-item"><a href="/About/" class="nav-link">加入我们</a></div><a href="https://github.com/tigerbrokers" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title">文章</span><span class="arrow right"></span></a><ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----><a href="/Blogs/data-visiualization.html" class="nav-link">有关数据可视化学习</a></li><li class="dropdown-item"><!----><a href="/Blogs/cors-and-nginx.html" class="nav-link router-link-exact-active router-link-active">有关跨域 CORS 及 Nginx 配置</a></li><li class="dropdown-item"><!----><a href="/Blogs/webpack.html" class="nav-link">webpack构建工具</a></li><li class="dropdown-item"><!----><a href="/Blogs/chart.html" class="nav-link">数据可视化</a></li><li class="dropdown-item"><!----><a href="/Blogs/vue-skeleton.html" class="nav-link">Vue骨架屏</a></li></ul></div></div><div class="nav-item"><a href="/About/" class="nav-link">加入我们</a></div><a href="https://github.com/tigerbrokers" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav><!----></div><div class="page"><div class="content"><h1 id="有关跨域-cors-及-nginx-配置"><a href="#有关跨域-cors-及-nginx-配置" aria-hidden="true" class="header-anchor">#</a> 有关跨域 CORS 及 Nginx 配置</h1><hr><p>跨域请求针对浏览器的同源策略(Same-Origin Policy)而言，指一个网站主动请求另外一个网站的资源(图片、javascript、视频等)。</p><p>同源策略要求网站只能有限制的访问外部网站的资源，不合法的请求会被拦截。网站的源由协议、域名、端口三部分组成，有一部分不同就被视为不同源，两个不同的域名即便指向同一个ip地址也是跨域的。网站通过AJAX请求资源是典型的跨域请求，需要外部网站许可才能访问。
+</p><h2 id="什么是跨域？"><a href="#什么是跨域？" aria-hidden="true" class="header-anchor">#</a> 什么是跨域？</h2><p>跨域请求针对浏览器的同源策略(Same-Origin Policy)而言，指一个网站主动请求另外一个网站的资源(图片、javascript、视频等)。</p><p>同源策略要求网站只能有限制的访问外部网站的资源，不合法的请求会被拦截。网站的源由协议、域名、端口三部分组成，有一部分不同就被视为不同源，两个不同的域名即便指向同一个ip地址也是跨域的。网站通过AJAX请求资源是典型的跨域请求，需要外部网站许可才能访问。</p><p>同源策略是浏览器端的安全限制。</p><p><img src="/assets/images/15178986212867.jpg" alt></p><blockquote><p>“Domains, protocols and ports must match”</p></blockquote><h2 id="跨域对前端的影响"><a href="#跨域对前端的影响" aria-hidden="true" class="header-anchor">#</a> 跨域对前端的影响</h2><ul><li>AJAX：请求无法发送和接收</li><li>WebFonts：字体文件无法从别的域加载</li><li>SVG：通过use引用的外部资源无法使用</li><li>Canvas/WebGL：如无法读取图片的点阵数据，无法toDateURL等</li><li>Video：无法截取快照</li></ul><p>通常浏览器控制台会明确打印出跨域错误及其帮助信息，如：</p><p><img src="/assets/images/15178986972043.jpg" alt></p><h2 id="cors的浏览器支持"><a href="#cors的浏览器支持" aria-hidden="true" class="header-anchor">#</a> CORS的浏览器支持</h2><p><img src="/assets/images/15178987236463.jpg" alt></p><p>基本主流浏览器都已经支持。</p><h2 id="跨域请求过程"><a href="#跨域请求过程" aria-hidden="true" class="header-anchor">#</a> 跨域请求过程</h2><p><img src="/assets/images/15178987563714.jpg" alt></p><ol><li>首先查看http头部有无origin字段；</li><li>如果没有，或者不允许，直接当成普通请求处理，结束；</li><li>如果有并且是允许的，那么再看是否是preflight(method=OPTIONS)；</li><li>如果是preflight，就返回Allow-Headers、Allow-Methods等，内容为空；</li><li>如果不是preflight，就返回Allow-Origin、Allow-Credentials等，并返回正常内容。</li></ol><h3 id="简单请求-simple-request"><a href="#简单请求-simple-request" aria-hidden="true" class="header-anchor">#</a> 简单请求(Simple Request)</h3><p>GET, HEAD, POST 方法，并且POST方法的Content-Type只包含 text/plain, application/x-www-form-urlencoded, multipart/form-data</p><h3 id="预请求-preflighted-request"><a href="#预请求-preflighted-request" aria-hidden="true" class="header-anchor">#</a> 预请求(Preflighted Request)</h3><p>在简单请求之外的其它请求发出前，都会先发一个OPTION请求，以探测服务器是否支持及允许CORS请求的配置参数。</p><blockquote><p>我们的大多数AJAX请求包含Authentication头，因此这些都不会是简单请求，所有请求都需要先发一个预请求。</p></blockquote><h2 id="跨域相关http-headers"><a href="#跨域相关http-headers" aria-hidden="true" class="header-anchor">#</a> 跨域相关HTTP Headers</h2><h3 id="相关headers介绍"><a href="#相关headers介绍" aria-hidden="true" class="header-anchor">#</a> 相关Headers介绍</h3><p><img src="/assets/images/15179074088703.jpg" alt></p><ul><li>请求头都是由浏览器自动生成的，根据请求的不是当前域进行判断。</li><li>服务器端需要支持OPTION请求，并返回204</li><li>其它请求服务器端需要添加http headers即可，所有验证逻辑均在浏览器端完成。</li></ul><h3 id="支持cookies的跨域"><a href="#支持cookies的跨域" aria-hidden="true" class="header-anchor">#</a> 支持Cookies的跨域</h3><p>若接口（比如http://api.com/ping）需要在自己域（http://api.com）下读写Cookies, 在没有 <code>Access-Control-Allow-Credentials: true</code> 的请求中，Cookies是不支持的，即 接口不能够读写域下的Cookies 。</p><p>因此要支持Cookies的跨域，需要服务器端返回如下头：</p><div class="language- extra-class"><pre class="language-text"><code>// OPTION Request
+OPTIONS /api/v1/captcha?deviceId=web20180110_71007&amp;platform=desktop-web&amp;env=Chrome&amp;vendor=web&amp;lang=&amp;appVer=4.0.0 HTTP/1.1
+Host: test-oauth.itiger.com
+Access-Control-Request-Method: GET
+Origin: https://test-web.itiger.com
+Access-Control-Request-Headers: authorization
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+// OPTION Response
+HTTP/1.1 204 No Content
+Date: Wed, 10 Jan 2018 09:13:22 GMT
+Content-Type: text/plain charset=UTF-8
+Connection: keep-alive
+Server: nginx/1.9.6
+Access-Control-Allow-Origin: https://test-web.itiger.com
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Methods: POST, GET, OPTIONS, HEAD, DELETE, PUT
+Access-Control-Allow-Headers: DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+
+
+// GET Request
+GET /api/v1/captcha?deviceId=web20180110_71007&amp;platform=desktop-web&amp;env=Chrome&amp;vendor=web&amp;lang=&amp;appVer=4.0.0 HTTP/1.1
+Host: test-oauth.itiger.com
+Connection: keep-alive
+
+Accept: application/json, text/plain, */*
+Origin: https://test-web.itiger.com
+Authorization: Bearer gMnH2uCUzsoncdiC90XJaYDpoYgxDYiBMydIUGfC9NDkfSiiD0
+
+
+
+// GET Response
+HTTP/1.1 200 OK
+Date: Wed, 10 Jan 2018 09:16:19 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Server: TornadoServer/3.2.2
+Etag: W/&quot;d8b94d7da2b3d9cec8a195d024dea7147a470d4b&quot;
+Pragma: no-store
+Cache-Control: no-store
+Set-Cookie: captcha=&quot;2|1:0|10:1515575779|7:captcha|88:NDdkNmYzYjYwMzQ5N2ViNTU0YjQ0YmEyNTY3MDVjZmVkMWNmZTc1ODRmNzNiNGNjN2M1Yzc5Mzg4MjE0YTg3Yg==|7fe5bc2d6d748af5fd3442a09ad07f8d819db249e0c13d1047e1411611e25878&quot;; expires=Fri, 09 Feb 2018 09:16:19 GMT; Path=/
+Access-Control-Allow-Origin: https://test-web.itiger.com
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Methods: POST, GET, OPTIONS, HEAD, DELETE, PUT
+Access-Control-Allow-Headers: Referer,Accept,Origin,User-Agent,Authorization,NT,X-CustomHeader,Keep-Alive,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Connection,DNT
+Content-Encoding: gzip
+</code></pre></div><p>除此之外，前端在进行请求时需要特别标注：</p><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Vanilla</span>
+<span class="token keyword">let</span> xhr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+xhr<span class="token punctuation">.</span>withCredentials <span class="token operator">=</span> <span class="token boolean">true</span>
+
+
+<span class="token comment">// JQuery</span>
+$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    type<span class="token punctuation">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
+    data<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    dataType<span class="token punctuation">:</span> <span class="token string">'json'</span><span class="token punctuation">,</span>
+    xhrFields<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+       withCredentials<span class="token punctuation">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+
+<span class="token comment">// Vue-resource</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span>$http<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  credentials<span class="token punctuation">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="调试cors请求问题"><a href="#调试cors请求问题" aria-hidden="true" class="header-anchor">#</a> 调试CORS请求问题</h2><p>主要有两种方法：</p><h3 id="简单判定是否cors问题，"><a href="#简单判定是否cors问题，" aria-hidden="true" class="header-anchor">#</a> 简单判定是否CORS问题，</h3><ol><li>查看控制台出错日志信息</li><li>下载 <a href="https://chrome.google.com/webstore/detail/nlfbmbojpeacfghkpbjhddihlkkiljbi" target="_blank" rel="noopener noreferrer">CORS 调试<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>  浏览器插件，开启后重新请求</li></ol><p><img src="/assets/images/15179075649303.jpg" alt></p><blockquote><p>注意：
+开启并用默认配置(<em>😕/</em>)，可能会导致某些网站访问异常，如GitHub。建议自行添加过滤。
+此种方法也适用于开发时调用暂未配置跨域的接口。</p></blockquote><h3 id="用charles修改http请求调试"><a href="#用charles修改http请求调试" aria-hidden="true" class="header-anchor">#</a> 用Charles修改HTTP请求调试</h3><h2 id="nginx-配置参考"><a href="#nginx-配置参考" aria-hidden="true" class="header-anchor">#</a> Nginx 配置参考</h2><div class="language-nginx extra-class"><pre class="language-nginx"><code><span class="token keyword">map</span> <span class="token variable">$http_origin</span> <span class="token variable">$allow_origin</span> <span class="token punctuation">{</span>
+  default <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+  <span class="token string">&quot;~^https?://(?:[^/]*\.)?(stevebuzonas\.(?:com|local))(?::[0-9]+)?$&quot;</span> <span class="token string">&quot;$http_origin&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">map</span> <span class="token variable">$request_method</span> <span class="token variable">$cors_method</span> <span class="token punctuation">{</span>
+  default <span class="token string">&quot;allowed&quot;</span><span class="token punctuation">;</span>
+  <span class="token string">&quot;OPTIONS&quot;</span> <span class="token string">&quot;preflight&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">map</span> <span class="token variable">$cors_method</span> <span class="token variable">$cors_max_age</span> <span class="token punctuation">{</span>
+  default <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+  <span class="token string">&quot;preflight&quot;</span> <span class="token number">1728000</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">map</span> <span class="token variable">$cors_method</span> <span class="token variable">$cors_allow_methods</span> <span class="token punctuation">{</span>
+  default <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+  <span class="token string">&quot;preflight&quot;</span> <span class="token string">&quot;GET, POST, OPTIONS&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">map</span> <span class="token variable">$cors_method</span> <span class="token variable">$cors_allow_headers</span> <span class="token punctuation">{</span>
+  default <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+  <span class="token string">&quot;preflight&quot;</span> <span class="token string">&quot;Authorization,Content-Type,Accept,Origin,User-Agent,DNT,Cache-Control,X-Mx-ReqToken,Keep-Alive,X-Requested-With,If-Modified-Since,Authorization&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">map</span> <span class="token variable">$cors_method</span> <span class="token variable">$cors_content_length</span> <span class="token punctuation">{</span>
+  default <span class="token variable">$initial_content_length</span><span class="token punctuation">;</span>
+  <span class="token string">&quot;preflight&quot;</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">map</span> <span class="token variable">$cors_method</span> <span class="token variable">$cors_content_type</span> <span class="token punctuation">{</span>
+  default <span class="token variable">$initial_content_type</span><span class="token punctuation">;</span>
+  <span class="token string">&quot;preflight&quot;</span> <span class="token string">&quot;text/plain charset=UTF-8&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">add_header</span> Access<span class="token operator">-</span>Control<span class="token operator">-</span><span class="token keyword">Allow</span><span class="token operator">-</span>Origin <span class="token variable">$allow_origin</span> always<span class="token punctuation">;</span>
+<span class="token keyword">add_header</span> Access<span class="token operator">-</span>Control<span class="token operator">-</span><span class="token keyword">Allow</span><span class="token operator">-</span>Credentials <span class="token string">'true'</span> always<span class="token punctuation">;</span>
+<span class="token keyword">add_header</span> Access<span class="token operator">-</span>Control<span class="token operator">-</span>Max<span class="token operator">-</span>Age <span class="token variable">$cors_max_age</span> always<span class="token punctuation">;</span>
+<span class="token keyword">add_header</span> Access<span class="token operator">-</span>Control<span class="token operator">-</span><span class="token keyword">Allow</span><span class="token operator">-</span>Methods <span class="token variable">$cors_allow_methods</span> always<span class="token punctuation">;</span>
+<span class="token keyword">add_header</span> Access<span class="token operator">-</span>Control<span class="token operator">-</span><span class="token keyword">Allow</span><span class="token operator">-</span>Headers <span class="token variable">$cors_allow_headers</span> always<span class="token punctuation">;</span>
+
+<span class="token keyword">set</span> <span class="token variable">$initial_content_length</span> <span class="token variable">$sent_http_content_length</span><span class="token punctuation">;</span>
+<span class="token keyword">add_header</span> <span class="token string">'Content-Length'</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">add_header</span> <span class="token string">'Content-Length'</span> <span class="token variable">$cors_content_length</span><span class="token punctuation">;</span>
+
+<span class="token keyword">set</span> <span class="token variable">$initial_content_type</span> <span class="token variable">$sent_http_content_type</span><span class="token punctuation">;</span>
+<span class="token keyword">add_header</span> Content<span class="token operator">-</span>Type <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">add_header</span> Content<span class="token operator">-</span>Type <span class="token variable">$cors_content_type</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$request_method</span> <span class="token operator">=</span> <span class="token string">'OPTIONS'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token number">204</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>注意：</p><ol><li>相关Access-Control的add_header后加了<code>always</code>，因为默认情况下，<code>add_header</code>只作用于状态码为 200, 201 (1.3.10), 204, 206, 301, 302, 303, 304, 307 (1.1.16, 1.0.13), or 308 (1.13.0) 之中的响应，并不支持40x,50x等，因此添加<code>always</code>可以支持所有状态码。 见：http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header</li><li>之所以用<code>map</code>命令而不是<code>if</code>，是由于if其实是归属于nginx_rewrite模块的，对于<code>try_files</code>等会不支持，Nginx官方也并不建议使用<code>if</code>。见：https://www.nginx.com/resources/wiki/start/topics/depth/ifisevil/</li><li>以上<code>nginx-cors.conf</code>可如下方式使用：</li></ol><div class="language-nginx extra-class"><pre class="language-nginx"><code><span class="token keyword">location</span> <span class="token operator">/</span> <span class="token punctuation">{</span>
+  <span class="token keyword">include</span> <span class="token punctuation">.</span><span class="token operator">/</span>nginx<span class="token operator">-</span>cors<span class="token punctuation">.</span>conf<span class="token punctuation">;</span>
+
+
+  <span class="token keyword">proxy_pass</span> <span class="token keyword">http</span><span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span><span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token punctuation">:</span><span class="token number">4000</span><span class="token punctuation">;</span>
+  proxy_set_http_header HOST <span class="token variable">$http_host</span><span class="token punctuation">;</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="参考资源"><a href="#参考资源" aria-hidden="true" class="header-anchor">#</a> 参考资源</h2><ul><li>https://www.w3.org/TR/cors/</li><li>https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS</li><li>https://www.test-cors.org/</li><li>https://enable-cors.org/index.html</li><li>https://www.html5rocks.com/en/tutorials/cors/</li></ul><h2 id="扩展知识"><a href="#扩展知识" aria-hidden="true" class="header-anchor">#</a> 扩展知识</h2><ul><li>HTTPS</li><li>Nginx</li><li>CSP</li><li>HTTP/1.1 vs HTTP2</li></ul></div><div class="page-edit"><div class="edit-link"><a href="https://github.com/tigerbrokers/edit/master/docs/Blogs/cors-and-nginx.md" target="_blank" rel="noopener noreferrer">Edit this page</a><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div><!----></div><!----></div></div></div>
+    <script src="/assets/js/5.2dd04340.js" defer></script><script src="/assets/js/app.5959fe07.js" defer></script>
+  </body>
+</html>
